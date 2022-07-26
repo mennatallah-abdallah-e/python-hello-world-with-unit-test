@@ -38,7 +38,7 @@ jobs:
     - uses: inception-health/otel-upload-test-artifact-action@latest
       if: always()
       with:
-        jobName: "run-test"
+        jobName: "run-test (${{ matrix.python-version }})"
         stepName: "Analysing-the-code-with-test"
         path: "*.xml"
         type: "junit"
