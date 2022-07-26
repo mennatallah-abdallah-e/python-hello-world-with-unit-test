@@ -24,6 +24,7 @@ jobs:
         chmod +x nix/run_tests_and_coverage.sh
         sh nix/run_tests_and_coverage.sh
         ls 
+        cat test_summary.xml
        # pylint $(git ls-files '*.py')
     - name: Export Workflow Trace
       if: always()
