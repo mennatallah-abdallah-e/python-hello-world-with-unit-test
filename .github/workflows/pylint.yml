@@ -26,18 +26,18 @@ jobs:
         pipenv run coverage report -m  --include="src/*" --omit="*/test/*,src/__init__*"
         pipenv run coverage xml -o test/coverage.xml
         pipenv run pytest ./test/  --junitxml=test/test_summary.xml -o junit_family=xunit2
-    - name: Post JUnit test results to New Relic
-      uses: newrelic/junit-reporter-action@v0.1.1
-      with:
-          accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
-          ingestLicenseKey: ${{ secrets.NEW_RELIC_INGEST_LICENSE_KEY }}
-          testOutputPath: test/test_summary.xml
+#     - name: Post JUnit test results to New Relic
+#       uses: newrelic/junit-reporter-action@v0.1.1
+#       with:
+#           accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
+#           ingestLicenseKey: ${{ secrets.NEW_RELIC_INGEST_LICENSE_KEY }}
+#           testOutputPath: test/test_summary.xml
     - uses: inception-health/otel-upload-test-artifact-action@latest
       if: always()
       with:
         jobName: "run-test"
         stepName: "Analysing-the-code-with-test"
-        path: "test/coverage.xml"
+        path: "test/test_summary.xml"
         type: "junit"
         githubToken: ${{ secrets.GITHUB_TOKEN }}
     - name: Export Workflow Trace
