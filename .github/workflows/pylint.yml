@@ -26,14 +26,7 @@ jobs:
         pipenv run coverage report -m  --include="src/*" --omit="*/test/*,src/__init__*"
         pipenv run coverage xml
         pipenv run pytest ./test/  --junitxml=test_summary.xml -o junit_family=xunit2
-    - name: Export Workflow Trace
-      if: always()
-      uses: inception-health/otel-export-trace-action@latest
-      with:
-        otlpEndpoint: https://otlp.eu01.nr-data.net
-        otlpHeaders: ${{ secrets.OTLP_HEADERS }}
-        githubToken: ${{ secrets.GITHUB_TOKEN }}
-        runId: ${{ github.event.workflow_run.id }}
+  
     - uses: inception-health/otel-upload-test-artifact-action@latest
       if: always()
       with:
@@ -42,3 +35,11 @@ jobs:
         path: "test_summary.xml"
         type: "junit"
         githubToken: ${{ secrets.GITHUB_TOKEN }}
+    - name: Export Workflow Trace
+      if: always()
+      uses: inception-health/otel-export-trace-action@latest
+      with:
+        otlpEndpoint: https://otlp.eu01.nr-data.net
+        otlpHeaders: ${{ secrets.OTLP_HEADERS }}
+        githubToken: ${{ secrets.GITHUB_TOKEN }}
+        runId: ${{ github.event.workflow_run.id }}
