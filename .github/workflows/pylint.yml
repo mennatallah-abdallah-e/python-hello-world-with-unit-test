@@ -26,6 +26,7 @@ jobs:
         pipenv run coverage report -m  --include="src/*" --omit="*/test/*,src/__init__*"
         pipenv run coverage xml -o test/coverage.xml
         pipenv run pytest ./test/  --junitxml=test/test_summary.xml -o junit_family=xunit2
+        echo "TEST=test_value" >> $GITHUB_ENV
 #     - name: Post JUnit test results to New Relic
 #       uses: newrelic/junit-reporter-action@v0.1.1
 #       with:
