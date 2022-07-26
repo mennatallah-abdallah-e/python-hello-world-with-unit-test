@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  run-test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -38,7 +38,7 @@ jobs:
     - uses: inception-health/otel-upload-test-artifact-action@latest
       if: always()
       with:
-        jobName: "build"
+        jobName: "run-test"
         stepName: "Analysing-the-code-with-test"
         path: "*.xml"
         type: "junit"
