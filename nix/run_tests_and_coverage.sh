@@ -11,3 +11,4 @@ pipenv run coverage report -m  --include="src/*" --omit="*/test/*,src/__init__*"
 #           You don't want to include the Python code under Unit Tests to
 #           be reported under Covereage report.
  
+pipenv run pyest ./test/
