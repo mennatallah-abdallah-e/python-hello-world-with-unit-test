@@ -39,6 +39,6 @@ jobs:
       with:
         jobName: "run-test (${{ matrix.python-version }})"
         stepName: "Analysing-the-code-with-test"
-        path: "*.xml"
+        path: "test_summary.xml"
         type: "junit"
         githubToken: ${{ secrets.GITHUB_TOKEN }}
