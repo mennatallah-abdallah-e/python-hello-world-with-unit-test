@@ -1,4 +1,4 @@
-name: Pylint
+name: python-hello-world-with-unit-test
 
 on: 
   workflow_dispatch:
