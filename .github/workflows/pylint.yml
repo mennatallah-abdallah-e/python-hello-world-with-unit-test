@@ -32,22 +32,22 @@ jobs:
 #           accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
 #           ingestLicenseKey: ${{ secrets.NEW_RELIC_INGEST_LICENSE_KEY }}
 #           testOutputPath: test/test_summary.xml
-    - uses: inception-health/otel-upload-test-artifact-action@latest
-      if: always()
-      with:
-        jobName: "run-test"
-        stepName: "Analysing-the-code-with-test"
-        path: "test/test_summary.xml"
-        type: "junit"
-        githubToken: ${{ secrets.GITHUB_TOKEN }}
-    - name: Export Workflow Trace
-      if: always()
-      uses: inception-health/otel-export-trace-action@latest
-      with:
-        otlpEndpoint: https://otlp.eu01.nr-data.net
-        otlpHeaders: ${{ secrets.OTLP_HEADERS }}
-        githubToken: ${{ secrets.GITHUB_TOKEN }}
-        runId: ${{ github.event.workflow_run.id }}
+#     - uses: inception-health/otel-upload-test-artifact-action@latest
+#       if: always()
+#       with:
+#         jobName: "run-test"
+#         stepName: "Analysing-the-code-with-test"
+#         path: "test/test_summary.xml"
+#         type: "junit"
+#         githubToken: ${{ secrets.GITHUB_TOKEN }}
+#     - name: Export Workflow Trace
+#       if: always()
+#       uses: inception-health/otel-export-trace-action@latest
+#       with:
+#         otlpEndpoint: https://otlp.eu01.nr-data.net
+#         otlpHeaders: ${{ secrets.OTLP_HEADERS }}
+#         githubToken: ${{ secrets.GITHUB_TOKEN }}
+#         runId: ${{ github.event.workflow_run.id }}
     - name: Send data to OTLP backend
       uses: codeboten/github-action-to-otlp@v1
       with:
