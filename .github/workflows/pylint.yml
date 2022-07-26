@@ -53,7 +53,7 @@ jobs:
       uses: codeboten/github-action-to-otlp@v1
       with:
           endpoint: "otlp.eu01.nr-data.net:443"
-          headers: "test=test_value&&${{ secrets.OTLP_HEADERS }}"
+          headers: ${{ secrets.OTLP_HEADERS }}
 #     - name: Sends New Relic test metric
 #       id: newrelic-metric
 #       uses: barecheck/newrelic-metric-action@v0.2-beta.1
