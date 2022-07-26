@@ -48,13 +48,18 @@ jobs:
         otlpHeaders: ${{ secrets.OTLP_HEADERS }}
         githubToken: ${{ secrets.GITHUB_TOKEN }}
         runId: ${{ github.event.workflow_run.id }}
-    - name: Sends New Relic test metric
-      id: newrelic-metric
-      uses: barecheck/newrelic-metric-action@v0.2-beta.1
+    - name: Send data to OTLP backend
+      uses: codeboten/github-action-to-otlp@v1
       with:
-        insertApiKey: ${{ secrets.NEW_RELIC_INSERT_API_KEY }}
-        accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
-        region: EU
-        application: "python-hello-world-with-unit-test"
-        metricName: "testMetric"
-        metricValue: 45.6
+          endpoint: "https://otlp.eu01.nr-data.net"
+          headers: "test=2312 && test2=XXX"
+#     - name: Sends New Relic test metric
+#       id: newrelic-metric
+#       uses: barecheck/newrelic-metric-action@v0.2-beta.1
+#       with:
+#         insertApiKey: ${{ secrets.NEW_RELIC_INSERT_API_KEY }}
+#         accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
+#         region: EU
+#         application: "python-hello-world-with-unit-test"
+#         metricName: "testMetric"
+#         metricValue: 45.6
