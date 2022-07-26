@@ -21,12 +21,11 @@ jobs:
         pip install pylint pipenv coverage flask pytest
     - name: Analysing-the-code-with-test
       run: |
-        chmod +x nix/run_tests_and_coverage.sh
-        sh nix/run_tests_and_coverage.sh
-        ls 
-        cat test_summary.xml
-        cat coverage.xml
-       # pylint $(git ls-files '*.py')
+       #!/usr/bin/env sh
+        pipenv run coverage run -m unittest discover -b
+        pipenv run coverage report -m  --include="src/*" --omit="*/test/*,src/__init__*"
+        pipenv run coverage xml
+        pipenv run pytest ./test/  --junitxml=test_summary.xml -o junit_family=xunit2
     - name: Export Workflow Trace
       if: always()
       uses: inception-health/otel-export-trace-action@latest
