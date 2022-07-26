@@ -32,7 +32,7 @@ jobs:
       with:
         jobName: "run-test"
         stepName: "Analysing-the-code-with-test"
-        path: "test/*.xml"
+        path: "ttest/coverage.xml"
         type: "junit"
         githubToken: ${{ secrets.GITHUB_TOKEN }}
     - name: Export Workflow Trace
